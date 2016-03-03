@@ -390,12 +390,4 @@ static CGSize CGSizeScale(CGSize size, CGFloat scale) {
     });
 }
 
-- (void) setCustomTitle:(NSString *)customTitle {
-    _customTitle = customTitle;
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        self.navigationItem.title = customTitle;
-    });
-}
-
 @end

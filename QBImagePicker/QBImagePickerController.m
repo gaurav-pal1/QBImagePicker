@@ -22,7 +22,7 @@
 
 @implementation QBImagePickerController
 
-- (instancetype)init
+- (instancetype)initWithLaunchTitle:(NSString *)title
 {
     self = [super init];
     
@@ -52,7 +52,7 @@
         
         // Set instance
         QBAlbumsViewController *albumsViewController = (QBAlbumsViewController *)self.albumsNavigationController.topViewController;
-        albumsViewController.customTitle = self.launchTitle;
+        albumsViewController.customTitle = title;
         albumsViewController.imagePickerController = self;
     }
     
