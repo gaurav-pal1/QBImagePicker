@@ -17,6 +17,7 @@
 @property (nonatomic, strong) UINavigationController *albumsNavigationController;
 
 @property (nonatomic, strong) NSBundle *assetBundle;
+@property (nonatomic, strong) NSString *launchTitle;
 
 @end
 
@@ -27,36 +28,54 @@
     self = [super init];
     
     if (self) {
-        // Set default values
-        self.assetCollectionSubtypes = @[
-                                         @(PHAssetCollectionSubtypeSmartAlbumUserLibrary),
-                                         @(PHAssetCollectionSubtypeAlbumMyPhotoStream),
-                                         @(PHAssetCollectionSubtypeSmartAlbumPanoramas),
-                                         @(PHAssetCollectionSubtypeSmartAlbumVideos),
-                                         @(PHAssetCollectionSubtypeSmartAlbumBursts)
-                                         ];
-        self.minimumNumberOfSelection = 1;
-        self.numberOfColumnsInPortrait = 4;
-        self.numberOfColumnsInLandscape = 7;
-        
-        _selectedAssets = [NSMutableOrderedSet orderedSet];
-        
-        // Get asset bundle
-        self.assetBundle = [NSBundle bundleForClass:[self class]];
-        NSString *bundlePath = [self.assetBundle pathForResource:@"QBImagePicker" ofType:@"bundle"];
-        if (bundlePath) {
-            self.assetBundle = [NSBundle bundleWithPath:bundlePath];
-        }
-        
-        [self setUpAlbumsViewController];
-        
-        // Set instance
-        QBAlbumsViewController *albumsViewController = (QBAlbumsViewController *)self.albumsNavigationController.topViewController;
-        albumsViewController.customTitle = title;
-        albumsViewController.imagePickerController = self;
+        self.launchTitle = title;
+        [self initialize];
     }
     
     return self;
+}
+
+
+- (instancetype)init
+{
+    self = [super init];
+    
+    if (self) {
+        [self initialize];
+    }
+    
+    return self;
+}
+
+
+- (void)initialize {
+    // Set default values
+    self.assetCollectionSubtypes = @[
+                                     @(PHAssetCollectionSubtypeSmartAlbumUserLibrary),
+                                     @(PHAssetCollectionSubtypeAlbumMyPhotoStream),
+                                     @(PHAssetCollectionSubtypeSmartAlbumPanoramas),
+                                     @(PHAssetCollectionSubtypeSmartAlbumVideos),
+                                     @(PHAssetCollectionSubtypeSmartAlbumBursts)
+                                     ];
+    self.minimumNumberOfSelection = 1;
+    self.numberOfColumnsInPortrait = 4;
+    self.numberOfColumnsInLandscape = 7;
+    
+    _selectedAssets = [NSMutableOrderedSet orderedSet];
+    
+    // Get asset bundle
+    self.assetBundle = [NSBundle bundleForClass:[self class]];
+    NSString *bundlePath = [self.assetBundle pathForResource:@"QBImagePicker" ofType:@"bundle"];
+    if (bundlePath) {
+        self.assetBundle = [NSBundle bundleWithPath:bundlePath];
+    }
+    
+    [self setUpAlbumsViewController];
+    
+    // Set instance
+    QBAlbumsViewController *albumsViewController = (QBAlbumsViewController *)self.albumsNavigationController.topViewController;
+    albumsViewController.customTitle = self.launchTitle;
+    albumsViewController.imagePickerController = self;
 }
 
 - (void)setUpAlbumsViewController
