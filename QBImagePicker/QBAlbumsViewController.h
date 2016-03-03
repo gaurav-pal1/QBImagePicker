@@ -12,6 +12,7 @@
 
 @interface QBAlbumsViewController : UITableViewController
 
+@property (nonatomic, strong) NSString *customTitle;
 @property (nonatomic, weak) QBImagePickerController *imagePickerController;
 
 @end

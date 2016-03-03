@@ -52,6 +52,7 @@
         
         // Set instance
         QBAlbumsViewController *albumsViewController = (QBAlbumsViewController *)self.albumsNavigationController.topViewController;
+        albumsViewController.customTitle = self.launchTitle;
         albumsViewController.imagePickerController = self;
     }
     

@@ -59,7 +59,7 @@ static CGSize CGSizeScale(CGSize size, CGFloat scale) {
     [super viewWillAppear:animated];
     
     // Configure navigation item
-    self.navigationItem.title = NSLocalizedStringFromTableInBundle(@"albums.title", @"QBImagePicker", self.imagePickerController.assetBundle, nil);
+    self.navigationItem.title = self.customTitle ? self.customTitle : NSLocalizedStringFromTableInBundle(@"albums.title", @"QBImagePicker", self.imagePickerController.assetBundle, nil);
     self.navigationItem.prompt = self.imagePickerController.prompt;
     
     // Show/hide 'Done' button
