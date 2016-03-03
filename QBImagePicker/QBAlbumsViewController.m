@@ -61,6 +61,7 @@ static CGSize CGSizeScale(CGSize size, CGFloat scale) {
     // Configure navigation item
     self.navigationItem.title = self.customTitle ? self.customTitle : NSLocalizedStringFromTableInBundle(@"albums.title", @"QBImagePicker", self.imagePickerController.assetBundle, nil);
     self.navigationItem.prompt = self.imagePickerController.prompt;
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:self.navigationItem.backBarButtonItem.style target:nil action:nil];
     
     // Show/hide 'Done' button
     if (self.imagePickerController.allowsMultipleSelection) {
